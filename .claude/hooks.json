@@ -1,0 +1,31 @@
+{
+  "description": "プロジェクト固有のフック設定",
+  "hooks": {
+    "before_tool_use": {
+      "enabled": false,
+      "command": "echo 'Tool use started'"
+    },
+    "after_tool_use": {
+      "enabled": false,
+      "command": "echo 'Tool use completed'"
+    },
+    "user_prompt_submit": {
+      "enabled": false,
+      "description": "ユーザーがプロンプトを送信した時",
+      "command": "echo 'Prompt submitted'"
+    }
+  },
+  "examples": {
+    "comment": "実用例：",
+    "git_auto_check": {
+      "enabled": false,
+      "command": "git status",
+      "description": "毎回git statusを確認"
+    },
+    "lint_before_commit": {
+      "enabled": false,
+      "command": "npm run lint",
+      "description": "コミット前に自動lint"
+    }
+  }
+}
