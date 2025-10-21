@@ -1,68 +1,53 @@
-import { getBlogPost, getBlogPosts } from '../../lib/mdx'
+import { getBlogPost, getBlogPosts } from '@/lib/mdx'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
 
-export async function generateStaticParams() {
-  const posts = await getBlogPosts()
+export function generateStaticParams() {
+  const posts = getBlogPosts()
   return posts.map((post) => ({
     slug: post.slug,
   }))
 }
 
-export default async function BlogPostPage({
+export default function BlogPostPage({
   params,
 }: {
   params: { slug: string }
 }) {
-  const post = await getBlogPost(params.slug)
+  const post = getBlogPost(params.slug)
 
   if (!post) {
     notFound()
   }
 
   return (
-    <div className="container">
+    <main style={{ maxWidth: '1200px', margin: '0 auto', padding: '20px' }}>
       <div className="window">
         <div className="window-title">ARTICLE.TXT - Blog Entry</div>
         <div className="window-content">
-          <div style={{ background: '#ffffff', border: '2px inset #c0c0c0', padding: '20px' }}>
-            <Link href="/blog" style={{
-              background: '#c0c0c0',
-              border: '2px outset #c0c0c0',
-              padding: '4px 12px',
-              fontFamily: 'inherit',
-              fontSize: '12px',
-              cursor: 'pointer',
-              marginBottom: '16px',
-              display: 'inline-block',
-              textDecoration: 'none',
-              color: '#000'
-            }}>
+          <div className="content-box markdown">
+            <Link href="/blog" className="btn-win95" style={{ marginBottom: '16px' }}>
               ◄ Back to List
             </Link>
-            
+
             <h1 style={{
-              color: '#000080',
-              fontSize: '18px',
+              color: 'var(--win95-blue)',
+              fontSize: '24px',
               fontWeight: 'bold',
-              marginBottom: '8px'
+              marginBottom: '8px',
+              marginTop: '16px'
             }}>
               {post.title}
             </h1>
-            
-            <div style={{
-              color: '#666',
-              fontSize: '12px',
-              marginBottom: '16px',
-              borderBottom: '1px solid #c0c0c0',
-              paddingBottom: '8px'
-            }}>
-              {post.date} - カテゴリ: {post.category}
+
+            <div className="post-meta" style={{ marginBottom: '16px', borderBottom: '1px solid var(--win95-gray)', paddingBottom: '8px' }}>
+              {post.date} - カテゴリ: {post.category || 'GENERAL'}
             </div>
-            
-            <div dangerouslySetInnerHTML={{ __html: post.content }} />
+
+            <div>{post.content}</div>
           </div>
         </div>
       </div>
-    </div>
+    </main>
   )
+}

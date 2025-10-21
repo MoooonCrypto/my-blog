@@ -1,18 +1,18 @@
-import { getProfile } from '../lib/mdx'
+import { getProfile } from '@/lib/mdx'
 
-export default async function ProfilePage() {
-  const profile = await getProfile()
+export default function ProfilePage() {
+  const profile = getProfile()
 
   return (
-    <div className="container">
+    <main style={{ maxWidth: '1200px', margin: '0 auto', padding: '20px' }}>
       <div className="window">
         <div className="window-title">PROFILE.TXT - Personal Information</div>
         <div className="window-content">
-          <div className="profile-content">
+          <div className="content-box markdown">
             <div dangerouslySetInnerHTML={{ __html: profile.content }} />
           </div>
         </div>
       </div>
-    </div>
+    </main>
   )
 }

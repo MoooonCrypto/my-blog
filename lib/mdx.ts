@@ -130,7 +130,25 @@ export function getPostsByTag(tag: string): PostMetadata[] {
 
 // カテゴリでフィルタリング
 export function getPostsByCategory(category: string): PostMetadata[] {
-  return getBlogPosts().filter(post => 
+  return getBlogPosts().filter(post =>
     post.category === category
   );
+}
+
+// プロフィール取得
+export function getProfile() {
+  try {
+    const fullPath = path.join(contentDirectory, 'profile.md');
+    const fileContents = fs.readFileSync(fullPath, 'utf8');
+    const { data, content } = matter(fileContents);
+
+    return {
+      ...data,
+      content,
+    };
+  } catch {
+    return {
+      content: 'プロフィール情報がありません',
+    };
+  }
 }
