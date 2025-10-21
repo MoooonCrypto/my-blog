@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>80年代PC風ブログサイト - デモ</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Courier Prime', monospace;
+            background: #c0c0c0;
+            color: #000;
+            line-height: 1.4;
+            min-height: 100vh;
+            background-image: 
+                radial-gradient(circle at 25% 25%, #ffffff 1px, transparent 1px),
+                radial-gradient(circle at 75% 75%, #ffffff 1px, transparent 1px);
+            background-size: 4px 4px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        /* ウィンドウ風フレーム */
+        .window {
+            background: #c0c0c0;
+            border: 3px outset #c0c0c0;
+            margin-bottom: 20px;
+            box-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .window-title {
+            background: linear-gradient(90deg, #000080, #0000ff);
+            color: white;
+            padding: 8px 12px;
+            font-weight: bold;
+            font-size: 14px;
+            border-bottom: 1px solid #000;
+        }
+        
+        .window-content {
+            padding: 16px;
+        }
+        
+        /* ヘッダー */
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .logo {
+            font-size: 32px;
+            font-weight: bold;
+            color: #000080;
+            text-shadow: 1px 1px 0px #ffffff;
+            margin-bottom: 10px;
+            font-family: monospace;
+        }
+        
+        .tagline {
+            font-size: 16px;
+            color: #000;
+            background: #ffffff;
+            padding: 8px 16px;
+            border: 2px inset #c0c0c0;
+            display: inline-block;
+        }
+        
+        /* ボタンスタイル */
+        .btn {
+            background: #c0c0c0;
+            border: 2px outset #c0c0c0;
+            padding: 8px 16px;
+            font-family: inherit;
+            font-size: 14px;
+            cursor: pointer;
+            text-decoration: none;
+            color: #000;
+            display: inline-block;
+            margin: 4px;
+            min-width: 120px;
+            text-align: center;
+        }
+        
+        .btn:hover {
+            background: #e0e0e0;
+        }
+        
+        .btn:active {
+            border: 2px inset #c0c0c0;
+        }
+        
+        /* ナビゲーション */
+        .nav {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 20px;
+            justify-content: center;
+        }
+        
+        /* コンテンツエリア */
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr 300px;
+            gap: 20px;
+        }
+        
+        @media (max-width: 768px) {
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        /* 記事リスト */
+        .post-list {
+            background: #ffffff;
+            border: 2px inset #c0c0c0;
+            padding: 16px;
+        }
+        
+        .post-item {
+            border-bottom: 1px solid #c0c0c0;
+            padding: 12px 0;
+            cursor: pointer;
+        }
+        
+        .post-item:hover {
+            background: #f0f0f0;
+            padding-left: 8px;
+        }
+        
+        .post-title {
+            font-weight: bold;
+            color: #000080;
+            margin-bottom: 4px;
+        }
+        
+        .post-meta {
+            font-size: 12px;
+            color: #666;
+            margin-bottom: 4px;
+        }
+        
+        .post-description {
+            font-size: 14px;
+            color: #333;
+        }
+        
+        /* サイドバー */
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        .widget {
+            background: #ffffff;
+            border: 2px inset #c0c0c0;
+            padding: 16px;
+        }
+        
+        .widget-title {
+            font-weight: bold;
+            color: #000080;
+            margin-bottom: 12px;
+            font-size: 16px;
+            border-bottom: 1px solid #c0c0c0;
+            padding-bottom: 4px;
+        }
+        
+        .tag-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px;
+        }
+        
+        .tag {
+            background: #000080;
+            color: white;
+            padding: 2px 6px;
+            font-size: 12px;
+            border: 1px outset #000080;
+        }
+        
+        /* ステータスバー */
+        .status-bar {
+            background: #c0c0c0;
+            border: 1px inset #c0c0c0;
+            padding: 4px 8px;
+            font-size: 12px;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        /* アスキーアート風アイコン */
+        .ascii-icon {
+            font-family: monospace;
+            font-size: 12px;
+            line-height: 1;
+            display: inline-block;
+            margin-right: 4px;
+        }
+        
+        /* フロッピーディスク風アイコン */
+        .floppy::before {
+            content: "▣";
+        }
+        
+        .folder::before {
+            content: "📁";
+        }
+        
+        .file::before {
+            content: "📄";
+        }
+        
+        /* 点滅カーソル */
+        .cursor {
+            animation: blink 1s infinite;
+        }
+        
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+        
+        /* レトロロード画面風 */
+        .loading {
+            font-family: monospace;
+            background: #000;
+            color: #00ff00;
+            padding: 20px;
+            margin: 20px 0;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- ヘッダーウィンドウ -->
+        <div class="window">
+            <div class="window-title">DEVELOPER.EXE - Personal Blog System v1.0</div>
+            <div class="window-content">
+                <div class="header">
+                    <div class="logo">◊ RETRO DEVELOPER ◊</div>
+                    <div class="tagline">個人開発エンジニアのデジタル記録庫</div>
+                </div>
+                
+                <div class="nav">
+                    <a href="#" class="btn"><span class="ascii-icon folder"></span>Home</a>
+                    <a href="#" class="btn"><span class="ascii-icon file"></span>About</a>
+                    <a href="#" class="btn"><span class="ascii-icon floppy"></span>Blog</a>
+                    <a href="#" class="btn"><span class="ascii-icon folder"></span>Portfolio</a>
+                    <a href="#" class="btn"><span class="ascii-icon file"></span>Sandbox</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- メインコンテンツ -->
+        <div class="content-grid">
+            <!-- 記事一覧 -->
+            <div class="window">
+                <div class="window-title">Recent Posts - BLOG.DAT</div>
+                <div class="window-content">
+                    <div class="post-list">
+                        <div class="post-item">
+                            <div class="post-title">► ブログサイトを立ち上げました</div>
+                            <div class="post-meta">1995/01/15 - カテゴリ: TECH</div>
+                            <div class="post-description">Next.js + MDXで個人ブログサイトを構築した話</div>
+                        </div>
+                        
+                        <div class="post-item">
+                            <div class="post-title">► React Hooksの便利なパターン</div>
+                            <div class="post-meta">1995/01/10 - カテゴリ: CODING</div>
+                            <div class="post-description">実際の開発で使える React Hooks のテクニック集</div>
+                        </div>
+                        
+                        <div class="post-item">
+                            <div class="post-title">► TypeScript設計パターン入門</div>
+                            <div class="post-meta">1995/01/05 - カテゴリ: TECH</div>
+                            <div class="post-description">型安全な設計を実現するパターンを解説</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- サイドバー -->
+            <div class="sidebar">
+                <!-- プロフィール -->
+                <div class="window">
+                    <div class="window-title">USER.INF</div>
+                    <div class="window-content">
+                        <div class="widget">
+                            <div class="widget-title">SYSTEM INFO</div>
+                            <p style="font-size: 12px; line-height: 1.6;">
+                                NAME: Developer<br>
+                                TYPE: Engineer<br>
+                                STATUS: Coding...<span class="cursor">_</span><br>
+                                LOCATION: Tokyo, JP<br>
+                                INTERESTS: WebDev, GameDev
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- タグリスト -->
+                <div class="window">
+                    <div class="window-title">TAGS.DAT</div>
+                    <div class="window-content">
+                        <div class="widget">
+                            <div class="widget-title">AVAILABLE TAGS</div>
+                            <div class="tag-list">
+                                <span class="tag">React</span>
+                                <span class="tag">TypeScript</span>
+                                <span class="tag">Next.js</span>
+                                <span class="tag">CSS</span>
+                                <span class="tag">JavaScript</span>
+                                <span class="tag">WebDev</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 最近のプロジェクト -->
+                <div class="window">
+                    <div class="window-title">PROJECTS.DIR</div>
+                    <div class="window-content">
+                        <div class="widget">
+                            <div class="widget-title">RECENT PROJECTS</div>
+                            <div style="font-size: 12px;">
+                                <div style="margin-bottom: 8px;">
+                                    <span class="ascii-icon floppy"></span>Todo管理アプリ<br>
+                                    <span style="color: #666;">React + TypeScript</span>
+                                </div>
+                                <div>
+                                    <span class="ascii-icon floppy"></span>ポートフォリオサイト<br>
+                                    <span style="color: #666;">Next.js + MDX</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sandbox風デモ -->
+        <div class="window">
+            <div class="window-title">SANDBOX.EXE - Experimental Features</div>
+            <div class="window-content">
+                <div class="loading">
+                    C:\SANDBOX> dir<br>
+                    Volume in drive C has no label.<br>
+                    Directory of C:\SANDBOX<br><br>
+                    CSS-GLITCH   &nbsp;&nbsp;&nbsp; EXP &nbsp;&nbsp;&nbsp; 1,234 95-01-20  12:34<br>
+                    WEBGL-DEMO   &nbsp;&nbsp;&nbsp; EXP &nbsp;&nbsp;&nbsp; 5,678 95-01-18  09:15<br>
+                    ANIMATION    &nbsp;&nbsp;&nbsp; TST &nbsp;&nbsp;&nbsp; 2,345 95-01-15  16:42<br>
+                    <br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3 File(s) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 9,257 bytes<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0 Dir(s)  &nbsp;&nbsp;&nbsp;1,440,256 bytes free<br>
+                    <br>
+                    C:\SANDBOX> <span class="cursor">_</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ステータスバー -->
+    <div class="status-bar">
+        <span>Ready</span>
+        <span>CPU: 486DX2-66MHz | RAM: 4MB | HDD: 120MB</span>
+        <span>15:42</span>
+    </div>
+
+    <script>
+        // クリック音効果（オプション）
+        document.querySelectorAll('.btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Web Audio APIで簡単なクリック音を再生
+                try {
+                    const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                    const oscillator = audioContext.createOscillator();
+                    const gainNode = audioContext.createGain();
+                    
+                    oscillator.connect(gainNode);
+                    gainNode.connect(audioContext.destination);
+                    
+                    oscillator.frequency.setValueAtTime(800, audioContext.currentTime);
+                    gainNode.gain.setValueAtTime(0.1, audioContext.currentTime);
+                    gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.1);
+                    
+                    oscillator.start(audioContext.currentTime);
+                    oscillator.stop(audioContext.currentTime + 0.1);
+                } catch (e) {
+                    // Audio APIが使用できない場合は無音
+                }
+            });
+        });
+
+        // ローディング風エフェクト
+        function typeText(element, text, speed = 50) {
+            element.textContent = '';
+            let i = 0;
+            const timer = setInterval(() => {
+                if (i < text.length) {
+                    element.textContent += text.charAt(i);
+                    i++;
+                } else {
+                    clearInterval(timer);
+                }
+            }, speed);
+        }
+
+        // ページロード時のタイピング効果
+        document.addEventListener('DOMContentLoaded', () => {
+            const logo = document.querySelector('.logo');
+            const originalText = logo.textContent;
+            typeText(logo, originalText, 100);
+        });
+    </script>
+</body>
+</html>
