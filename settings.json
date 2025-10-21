@@ -1,0 +1,138 @@
+{
+  "$schema": "https://json.schemastore.org/claude-settings.json",
+  "version": "1.0.0",
+  "project": {
+    "name": "my-blog",
+    "type": "nextjs-blog",
+    "description": "個人開発者向けブログサイト（Next.js + TypeScript + MDX）"
+  },
+  "rules": {
+    "git": {
+      "autoPush": false,
+      "requireConfirmationBeforePush": true,
+      "allowedBranches": {
+        "push": ["claude/*"],
+        "forbidden": ["main", "master"]
+      },
+      "commitMessageFormat": "conventional"
+    },
+    "packages": {
+      "requireConfirmationBeforeInstall": true,
+      "allowedPackages": [
+        "next",
+        "react",
+        "react-dom",
+        "typescript",
+        "tailwindcss",
+        "@tailwindcss/*",
+        "@mdx-js/*",
+        "@next/mdx",
+        "gray-matter",
+        "@types/*",
+        "eslint",
+        "eslint-config-next"
+      ],
+      "securityChecks": {
+        "enabled": true,
+        "minWeeklyDownloads": 100000,
+        "maxLastUpdateMonths": 12,
+        "requireLicense": ["MIT", "Apache-2.0", "BSD-3-Clause", "ISC"]
+      }
+    },
+    "coding": {
+      "typescript": {
+        "strictMode": true,
+        "noImplicitAny": true,
+        "explicitReturnTypes": true,
+        "preferType": true
+      },
+      "react": {
+        "preferServerComponents": true,
+        "minimizeClientComponents": true
+      },
+      "styling": {
+        "method": "tailwindcss",
+        "forbidInlineStyles": true,
+        "forbidCSSModules": true
+      }
+    }
+  },
+  "fileStructure": {
+    "namingConvention": {
+      "files": "kebab-case",
+      "components": "PascalCase",
+      "functions": "camelCase",
+      "types": "PascalCase",
+      "constants": "UPPER_SNAKE_CASE"
+    },
+    "directories": {
+      "app": "Next.js App Router pages",
+      "components": "Reusable React components",
+      "content": "MDX content files (blog, portfolio, sandbox)",
+      "lib": "Utility functions and type definitions",
+      "public": "Static assets"
+    }
+  },
+  "development": {
+    "beforeCommit": {
+      "runLint": true,
+      "runBuild": false,
+      "runTests": false,
+      "checkTypes": true
+    },
+    "devServer": {
+      "port": 3000,
+      "turbopack": true
+    }
+  },
+  "design": {
+    "theme": "retro-terminal",
+    "colorScheme": {
+      "background": "#000000",
+      "primary": "#22c55e",
+      "hover": "#22c55e",
+      "text": "#22c55e"
+    },
+    "typography": {
+      "fontFamily": "monospace",
+      "preferSystemFonts": true,
+      "forbidGoogleFonts": true
+    }
+  },
+  "content": {
+    "mdx": {
+      "directory": "content",
+      "categories": ["blog", "portfolio", "sandbox"],
+      "frontMatterRequired": true,
+      "slugSource": "filename"
+    }
+  },
+  "performance": {
+    "targets": {
+      "lighthouseScore": 90,
+      "firstContentfulPaint": 1500,
+      "timeToInteractive": 3000,
+      "maxBundleSize": 204800
+    }
+  },
+  "seo": {
+    "metadataRequired": true,
+    "generateSitemap": true,
+    "generateRobotsTxt": true
+  },
+  "security": {
+    "auditOnInstall": true,
+    "forbiddenPatterns": [
+      "console.log",
+      "debugger",
+      "any"
+    ]
+  },
+  "comments": {
+    "_git_autoPush": "GitHubへの自動pushを禁止",
+    "_packages_requireConfirmation": "新規パッケージインストール前に必ず確認",
+    "_coding_typescript_strictMode": "TypeScript strictモード必須",
+    "_styling_method": "Tailwind CSSのみ使用、インラインスタイル禁止",
+    "_design_forbidGoogleFonts": "環境制限によりGoogle Fonts禁止"
+  }
+}

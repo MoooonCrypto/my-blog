@@ -1,4 +1,4 @@
-// app/page.tsx - トップページ
+// app/page.tsx - トップページ (Windows 95風)
 import { getLatestPosts, getPortfolioItems } from '@/lib/mdx';
 import Link from 'next/link';
 
@@ -7,94 +7,140 @@ export default function Home() {
   const portfolioItems = getPortfolioItems().slice(0, 2);
 
   return (
-    <main className="min-h-screen bg-black text-green-400 font-mono p-8">
-      <div className="max-w-4xl mx-auto">
-        {/* Hero Section */}
-        <section className="mb-16">
-          <div className="border border-green-400 p-8 mb-8">
-            <h1 className="text-4xl font-bold mb-4 glitch-effect">
-              &gt; DEVELOPER.EXE
-            </h1>
-            <p className="text-xl mb-4">
-              個人開発エンジニアのデジタル空間へようこそ
-            </p>
-            <div className="flex gap-4">
-              <Link href="/about" className="border border-green-400 px-4 py-2 hover:bg-green-400 hover:text-black transition-colors">
-                ABOUT.TXT
-              </Link>
-              <Link href="/portfolio" className="border border-green-400 px-4 py-2 hover:bg-green-400 hover:text-black transition-colors">
-                PORTFOLIO.DIR
-              </Link>
+    <main style={{ maxWidth: '1200px', margin: '0 auto', padding: '20px' }}>
+      {/* ヘッダーウィンドウ */}
+      <div className="window">
+        <div className="window-title">DEVELOPER.EXE - Personal Blog System v1.0</div>
+        <div className="window-content">
+          <div style={{ textAlign: 'center', marginBottom: '20px' }}>
+            <div className="logo">◊ RETRO DEVELOPER ◊</div>
+            <div className="tagline">個人開発エンジニアのデジタル記録庫</div>
+          </div>
+
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', justifyContent: 'center', marginBottom: '20px' }}>
+            <Link href="/" className="btn-win95">
+              <span className="ascii-icon folder"></span>Home
+            </Link>
+            <Link href="/profile" className="btn-win95">
+              <span className="ascii-icon file"></span>Profile
+            </Link>
+            <Link href="/blog" className="btn-win95">
+              <span className="ascii-icon floppy"></span>Blog
+            </Link>
+            <Link href="/portfolio" className="btn-win95">
+              <span className="ascii-icon folder"></span>Portfolio
+            </Link>
+            <Link href="/sandbox" className="btn-win95">
+              <span className="ascii-icon file"></span>Sandbox
+            </Link>
+          </div>
+        </div>
+      </div>
+
+      {/* メインコンテンツグリッド */}
+      <div className="content-grid">
+        {/* 記事一覧 */}
+        <div className="window">
+          <div className="window-title">Recent Posts - BLOG.DAT</div>
+          <div className="window-content">
+            <div className="content-box">
+              {latestPosts.length > 0 ? (
+                latestPosts.map((post) => (
+                  <Link key={post.slug} href={`/blog/${post.slug}`} style={{ textDecoration: 'none', color: 'inherit' }}>
+                    <div className="post-item">
+                      <div className="post-title">► {post.title}</div>
+                      <div className="post-meta">{post.date} - カテゴリ: {post.category || 'GENERAL'}</div>
+                      <div className="post-description">{post.description}</div>
+                      {post.tags && post.tags.length > 0 && (
+                        <div style={{ marginTop: '8px' }}>
+                          {post.tags.map((tag) => (
+                            <span key={tag} className="tag">{tag}</span>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  </Link>
+                ))
+              ) : (
+                <p>記事がありません</p>
+              )}
+            </div>
+
+            <div style={{ marginTop: '16px' }}>
+              <Link href="/blog" className="btn-win95">すべての記事を見る</Link>
             </div>
           </div>
-        </section>
+        </div>
 
-        {/* Latest Posts */}
-        <section className="mb-16">
-          <h2 className="text-2xl font-bold mb-6 border-b border-green-400 pb-2">
-            &gt; RECENT_POSTS.LOG
-          </h2>
-          <div className="space-y-4">
-            {latestPosts.map((post) => (
-              <Link
-                key={post.slug}
-                href={`/blog/${post.slug}`}
-                className="block border border-green-400 p-4 hover:bg-green-400 hover:text-black transition-colors"
-              >
-                <div className="flex justify-between items-start mb-2">
-                  <h3 className="text-lg font-semibold">{post.title}</h3>
-                  <span className="text-sm">{post.date}</span>
-                </div>
-                <p className="text-sm opacity-80">{post.description}</p>
-                {post.tags && (
-                  <div className="flex gap-2 mt-2">
-                    {post.tags.map((tag) => (
-                      <span key={tag} className="text-xs border border-current px-2 py-1">
-                        #{tag}
-                      </span>
-                    ))}
-                  </div>
-                )}
-              </Link>
-            ))}
+        {/* サイドバー */}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+          {/* プロフィール */}
+          <div className="window">
+            <div className="window-title">USER.INF</div>
+            <div className="window-content">
+              <div className="widget">
+                <div className="widget-title">SYSTEM INFO</div>
+                <p style={{ fontSize: '12px', lineHeight: '1.6' }}>
+                  NAME: Developer<br />
+                  TYPE: Engineer<br />
+                  STATUS: Coding...<span className="cursor">_</span><br />
+                  LOCATION: Tokyo, JP<br />
+                  INTERESTS: WebDev, GameDev
+                </p>
+              </div>
+            </div>
           </div>
-          <div className="mt-6">
-            <Link href="/blog" className="text-green-400 hover:underline">
-              &gt; ALL_POSTS.EXE
-            </Link>
-          </div>
-        </section>
 
-        {/* Featured Portfolio */}
-        <section>
-          <h2 className="text-2xl font-bold mb-6 border-b border-green-400 pb-2">
-            &gt; FEATURED_WORKS.BIN
-          </h2>
-          <div className="grid md:grid-cols-2 gap-6">
-            {portfolioItems.map((item) => (
-              <Link
-                key={item.slug}
-                href={`/portfolio/${item.slug}`}
-                className="block border border-green-400 p-4 hover:bg-green-400 hover:text-black transition-colors"
-              >
-                <h3 className="text-lg font-semibold mb-2">{item.title}</h3>
-                <p className="text-sm opacity-80 mb-3">{item.description}</p>
-                <div className="flex flex-wrap gap-1">
-                  {item.tech.map((tech) => (
-                    <span key={tech} className="text-xs border border-current px-2 py-1">
-                      {tech}
-                    </span>
-                  ))}
+          {/* 最近のプロジェクト */}
+          <div className="window">
+            <div className="window-title">PROJECTS.DIR</div>
+            <div className="window-content">
+              <div className="widget">
+                <div className="widget-title">RECENT PROJECTS</div>
+                <div style={{ fontSize: '12px' }}>
+                  {portfolioItems.length > 0 ? (
+                    portfolioItems.map((item) => (
+                      <div key={item.slug} style={{ marginBottom: '12px' }}>
+                        <Link href={`/portfolio/${item.slug}`} style={{ color: 'var(--win95-blue)', textDecoration: 'none' }}>
+                          <span className="ascii-icon floppy"></span>{item.title}
+                        </Link>
+                        <br />
+                        <span style={{ color: '#666' }}>{item.tech.join(', ')}</span>
+                      </div>
+                    ))
+                  ) : (
+                    <p>プロジェクトがありません</p>
+                  )}
                 </div>
-              </Link>
-            ))}
+                <div style={{ marginTop: '12px' }}>
+                  <Link href="/portfolio" className="btn-win95" style={{ minWidth: 'auto', fontSize: '12px' }}>
+                    すべて見る
+                  </Link>
+                </div>
+              </div>
+            </div>
           </div>
-          <div className="mt-6">
-            <Link href="/portfolio" className="text-green-400 hover:underline">
-              &gt; ALL_PROJECTS.DIR
-            </Link>
+        </div>
+      </div>
+
+      {/* Sandbox風デモ */}
+      <div className="window">
+        <div className="window-title">SANDBOX.EXE - Experimental Features</div>
+        <div className="window-content">
+          <div className="terminal">
+            C:\SANDBOX&gt; dir<br />
+            Volume in drive C has no label.<br />
+            Directory of C:\SANDBOX<br /><br />
+            CSS-GLITCH   &nbsp;&nbsp;&nbsp; EXP &nbsp;&nbsp;&nbsp; 1,234 95-01-20  12:34<br />
+            WEBGL-DEMO   &nbsp;&nbsp;&nbsp; EXP &nbsp;&nbsp;&nbsp; 5,678 95-01-18  09:15<br />
+            ANIMATION    &nbsp;&nbsp;&nbsp; TST &nbsp;&nbsp;&nbsp; 2,345 95-01-15  16:42<br />
+            <br />
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3 File(s) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 9,257 bytes<br />
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0 Dir(s)  &nbsp;&nbsp;&nbsp;1,440,256 bytes free<br />
+            <br />
+            C:\SANDBOX&gt; <span className="cursor">_</span>
           </div>
-        </section>
+        </div>
       </div>
     </main>
   );

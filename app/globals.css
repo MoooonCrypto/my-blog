@@ -1,26 +1,320 @@
 @import "tailwindcss";
 
+/* Windows 95 / 80年代PC風デザイン */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --win95-gray: #c0c0c0;
+  --win95-dark-gray: #808080;
+  --win95-blue: #000080;
+  --win95-light-blue: #0000ff;
+  --win95-white: #ffffff;
+  --win95-black: #000000;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --font-mono: ui-monospace, 'Courier New', monospace;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: ui-monospace, 'Courier New', monospace;
+  background: var(--win95-gray);
+  color: var(--win95-black);
+  line-height: 1.4;
+  min-height: 100vh;
+  padding-bottom: 40px;
+  background-image:
+    radial-gradient(circle at 25% 25%, rgba(255,255,255,0.3) 1px, transparent 1px),
+    radial-gradient(circle at 75% 75%, rgba(255,255,255,0.3) 1px, transparent 1px);
+  background-size: 4px 4px;
+}
+
+/* ウィンドウ風フレーム */
+.window {
+  background: var(--win95-gray);
+  border: 3px outset var(--win95-gray);
+  margin-bottom: 20px;
+  box-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
+
+.window-title {
+  background: linear-gradient(90deg, var(--win95-blue), var(--win95-light-blue));
+  color: white;
+  padding: 8px 12px;
+  font-weight: bold;
+  font-size: 14px;
+  border-bottom: 1px solid var(--win95-black);
+}
+
+.window-content {
+  padding: 16px;
+}
+
+/* ボタンスタイル */
+.btn-win95 {
+  background: var(--win95-gray);
+  border: 2px outset var(--win95-gray);
+  padding: 8px 16px;
+  font-family: inherit;
+  font-size: 14px;
+  cursor: pointer;
+  text-decoration: none;
+  color: var(--win95-black);
+  display: inline-block;
+  margin: 4px;
+  min-width: 120px;
+  text-align: center;
+}
+
+.btn-win95:hover {
+  background: #e0e0e0;
+}
+
+.btn-win95:active {
+  border: 2px inset var(--win95-gray);
+}
+
+/* コンテンツボックス */
+.content-box {
+  background: var(--win95-white);
+  border: 2px inset var(--win95-gray);
+  padding: 16px;
+}
+
+/* ポストアイテム */
+.post-item {
+  border-bottom: 1px solid var(--win95-gray);
+  padding: 12px 0;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.post-item:hover {
+  background: #f0f0f0;
+  padding-left: 8px;
+}
+
+.post-title {
+  font-weight: bold;
+  color: var(--win95-blue);
+  margin-bottom: 4px;
+}
+
+.post-meta {
+  font-size: 12px;
+  color: #666;
+  margin-bottom: 4px;
+}
+
+.post-description {
+  font-size: 14px;
+  color: #333;
+}
+
+/* サイドバーウィジェット */
+.widget {
+  background: var(--win95-white);
+  border: 2px inset var(--win95-gray);
+  padding: 16px;
+}
+
+.widget-title {
+  font-weight: bold;
+  color: var(--win95-blue);
+  margin-bottom: 12px;
+  font-size: 16px;
+  border-bottom: 1px solid var(--win95-gray);
+  padding-bottom: 4px;
+}
+
+/* タグ */
+.tag {
+  background: var(--win95-blue);
+  color: white;
+  padding: 2px 6px;
+  font-size: 12px;
+  border: 1px outset var(--win95-blue);
+  display: inline-block;
+  margin: 2px;
+}
+
+/* ステータスバー */
+.status-bar {
+  background: var(--win95-gray);
+  border: 1px inset var(--win95-gray);
+  padding: 4px 8px;
+  font-size: 12px;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-between;
+  z-index: 1000;
+}
+
+/* アスキーアート風アイコン */
+.ascii-icon {
+  font-family: monospace;
+  font-size: 12px;
+  line-height: 1;
+  display: inline-block;
+  margin-right: 4px;
+}
+
+.floppy::before {
+  content: "▣";
+}
+
+.folder::before {
+  content: "📁";
+}
+
+.file::before {
+  content: "📄";
+}
+
+/* 点滅カーソル */
+.cursor {
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
+/* ターミナル風 */
+.terminal {
+  font-family: monospace;
+  background: var(--win95-black);
+  color: #00ff00;
+  padding: 20px;
+  margin: 20px 0;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+/* ヘッダーロゴ */
+.logo {
+  font-size: 32px;
+  font-weight: bold;
+  color: var(--win95-blue);
+  text-shadow: 1px 1px 0px var(--win95-white);
+  margin-bottom: 10px;
+  font-family: monospace;
+}
+
+.tagline {
+  font-size: 16px;
+  color: var(--win95-black);
+  background: var(--win95-white);
+  padding: 8px 16px;
+  border: 2px inset var(--win95-gray);
+  display: inline-block;
+}
+
+/* グリッドレイアウト */
+.content-grid {
+  display: grid;
+  grid-template-columns: 1fr 300px;
+  gap: 20px;
+}
+
+@media (max-width: 768px) {
+  .content-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* リンクスタイル */
+a {
+  color: var(--win95-blue);
+  text-decoration: underline;
+}
+
+a:visited {
+  color: #800080;
+}
+
+a:hover {
+  color: var(--win95-light-blue);
+}
+
+/* Markdown コンテンツスタイル */
+.markdown {
+  line-height: 1.6;
+}
+
+.markdown h1,
+.markdown h2,
+.markdown h3 {
+  color: var(--win95-blue);
+  margin-top: 1.5em;
+  margin-bottom: 0.5em;
+  font-weight: bold;
+}
+
+.markdown h1 {
+  font-size: 24px;
+  border-bottom: 2px solid var(--win95-gray);
+  padding-bottom: 4px;
+}
+
+.markdown h2 {
+  font-size: 20px;
+}
+
+.markdown h3 {
+  font-size: 16px;
+}
+
+.markdown p {
+  margin-bottom: 1em;
+}
+
+.markdown code {
+  background: var(--win95-white);
+  border: 1px solid var(--win95-dark-gray);
+  padding: 2px 4px;
+  font-family: monospace;
+  font-size: 13px;
+}
+
+.markdown pre {
+  background: var(--win95-black);
+  color: #00ff00;
+  padding: 12px;
+  overflow-x: auto;
+  margin: 1em 0;
+  border: 2px inset var(--win95-gray);
+}
+
+.markdown pre code {
+  background: transparent;
+  border: none;
+  padding: 0;
+  color: inherit;
+}
+
+.markdown ul,
+.markdown ol {
+  margin-left: 2em;
+  margin-bottom: 1em;
+}
+
+.markdown li {
+  margin-bottom: 0.5em;
+}
+
+.markdown blockquote {
+  border-left: 4px solid var(--win95-blue);
+  padding-left: 1em;
+  margin: 1em 0;
+  color: #555;
 }
