@@ -10,20 +10,19 @@ export interface PostMetadata {
 
 export interface PortfolioMetadata {
   title: string;
+  url: string;                    // デモURL or GitHubリポジトリURL
+  thumbnail: string;              // サムネイル画像パス
   date: string;
-  tech: string[];
-  github?: string;
-  demo?: string;
-  description: string;
+  description: string;            // 最大100文字
   slug: string;
 }
 
 export interface SandboxMetadata {
   title: string;
+  url: string;                    // デモURL
+  thumbnail: string;              // サムネイル画像パス
   date: string;
-  tags?: string[];
-  status: 'experimental' | 'complete' | 'deprecated';
-  description: string;
+  description: string;            // 最大100文字
   slug: string;
 }
 

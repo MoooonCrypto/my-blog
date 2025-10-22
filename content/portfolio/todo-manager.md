@@ -1,11 +1,9 @@
 ---
 title: "Todo Manager Pro"
-icon: "📋"
 url: "https://todo-app-demo.vercel.app"
+thumbnail: "/images/portfolio/todo-manager.png"
 date: "2024-01-10"
-tags: ["React", "TypeScript", "PostgreSQL"]
 description: "チーム向けタスク管理システム"
-featured: true
 ---
 
 # Todo Manager Pro
