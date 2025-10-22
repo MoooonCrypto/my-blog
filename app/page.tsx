@@ -105,7 +105,7 @@ export default function Home() {
                           <span className="ascii-icon floppy"></span>{item.title}
                         </Link>
                         <br />
-                        <span style={{ color: '#666' }}>{item.tech.join(', ')}</span>
+                        <span style={{ color: '#666' }}>{item.tech?.join(', ') || ''}</span>
                       </div>
                     ))
                   ) : (
