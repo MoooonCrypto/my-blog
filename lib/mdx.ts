@@ -121,20 +121,6 @@ export function getLatestPosts(limit: number = 5): PostMetadata[] {
   return getBlogPosts().slice(0, limit);
 }
 
-// タグでフィルタリング
-export function getPostsByTag(tag: string): PostMetadata[] {
-  return getBlogPosts().filter(post => 
-    post.tags?.includes(tag)
-  );
-}
-
-// カテゴリでフィルタリング
-export function getPostsByCategory(category: string): PostMetadata[] {
-  return getBlogPosts().filter(post =>
-    post.category === category
-  );
-}
-
 // プロフィール取得
 export function getProfile() {
   try {

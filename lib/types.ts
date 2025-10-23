@@ -2,28 +2,22 @@
 export interface PostMetadata {
   title: string;
   date: string;
-  description?: string;
-  tags?: string[];
-  category?: string;
   slug: string;
 }
 
 export interface PortfolioMetadata {
   title: string;
+  url: string;                    // デモURL or GitHubリポジトリURL
+  thumbnail: string;              // サムネイル画像パス
   date: string;
-  tech: string[];
-  github?: string;
-  demo?: string;
-  description: string;
   slug: string;
 }
 
 export interface SandboxMetadata {
   title: string;
+  url: string;                    // デモURL
+  thumbnail: string;              // サムネイル画像パス
   date: string;
-  tags?: string[];
-  status: 'experimental' | 'complete' | 'deprecated';
-  description: string;
   slug: string;
 }
 

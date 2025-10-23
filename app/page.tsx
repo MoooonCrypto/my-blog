@@ -49,15 +49,7 @@ export default function Home() {
                   <Link key={post.slug} href={`/blog/${post.slug}`} style={{ textDecoration: 'none', color: 'inherit' }}>
                     <div className="post-item">
                       <div className="post-title">► {post.title}</div>
-                      <div className="post-meta">{post.date} - カテゴリ: {post.category || 'GENERAL'}</div>
-                      <div className="post-description">{post.description}</div>
-                      {post.tags && post.tags.length > 0 && (
-                        <div style={{ marginTop: '8px' }}>
-                          {post.tags.map((tag) => (
-                            <span key={tag} className="tag">{tag}</span>
-                          ))}
-                        </div>
-                      )}
+                      <div className="post-meta">{post.date}</div>
                     </div>
                   </Link>
                 ))
@@ -104,8 +96,6 @@ export default function Home() {
                         <Link href={`/portfolio/${item.slug}`} style={{ color: 'var(--win95-blue)', textDecoration: 'none' }}>
                           <span className="ascii-icon floppy"></span>{item.title}
                         </Link>
-                        <br />
-                        <span style={{ color: '#666' }}>{item.tech?.join(', ') || ''}</span>
                       </div>
                     ))
                   ) : (

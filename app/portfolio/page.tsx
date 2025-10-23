@@ -1,5 +1,6 @@
 import { getPortfolioItems } from '@/lib/mdx'
 import Link from 'next/link'
+import Image from 'next/image'
 
 export default function PortfolioPage() {
   const portfolioItems = getPortfolioItems() || []
@@ -13,19 +14,37 @@ export default function PortfolioPage() {
             {portfolioItems.length > 0 ? (
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '20px' }}>
                 {portfolioItems.map((item) => (
-                  <Link key={item.slug} href={`/portfolio/${item.slug}`} style={{ textDecoration: 'none', color: 'inherit' }}>
-                    <div style={{ border: '2px outset var(--win95-gray)', padding: '16px', cursor: 'pointer', background: 'var(--win95-gray)' }}>
+                  <div key={item.slug} style={{ border: '2px outset var(--win95-gray)', padding: '0', background: 'var(--win95-gray)' }}>
+                    {/* サムネイル画像 */}
+                    {item.thumbnail && (
+                      <div style={{ width: '100%', height: '200px', position: 'relative', overflow: 'hidden', background: '#000' }}>
+                        <Image
+                          src={item.thumbnail}
+                          alt={item.title || 'Portfolio item'}
+                          fill
+                          style={{ objectFit: 'cover' }}
+                        />
+                      </div>
+                    )}
+
+                    {/* コンテンツ */}
+                    <div style={{ padding: '16px' }}>
                       <h3 className="post-title">{item.title || 'Untitled'}</h3>
-                      <p className="post-description">{item.description || ''}</p>
-                      {item.tech && item.tech.length > 0 && (
-                        <div style={{ marginTop: '12px' }}>
-                          {item.tech.map((tech) => (
-                            <span key={tech} className="tag">{tech}</span>
-                          ))}
-                        </div>
-                      )}
+                      <p className="post-meta" style={{ marginBottom: '8px' }}>{item.date}</p>
+
+                      {/* リンク */}
+                      <div style={{ marginTop: '16px', display: 'flex', gap: '8px' }}>
+                        <Link href={`/portfolio/${item.slug}`} className="btn-win95" style={{ flex: 1, textAlign: 'center' }}>
+                          詳細を見る
+                        </Link>
+                        {item.url && (
+                          <a href={item.url} target="_blank" rel="noopener noreferrer" className="btn-win95" style={{ flex: 1, textAlign: 'center' }}>
+                            デモを開く ↗
+                          </a>
+                        )}
+                      </div>
                     </div>
-                  </Link>
+                  </div>
                 ))}
               </div>
             ) : (

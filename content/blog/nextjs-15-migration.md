@@ -1,10 +1,6 @@
 ---
 title: "Next.js 15 完全移行ガイド"
 date: "2024-01-15"
-category: "TECH"
-tags: ["Next.js", "React", "Migration"]
-description: "Next.js 15での新機能と移行時の注意点について詳しく解説"
-author: "MOKOSAU"
 ---
 
 # Next.js 15 完全移行ガイド

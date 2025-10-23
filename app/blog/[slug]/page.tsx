@@ -41,7 +41,7 @@ export default function BlogPostPage({
             </h1>
 
             <div className="post-meta" style={{ marginBottom: '16px', borderBottom: '1px solid var(--win95-gray)', paddingBottom: '8px' }}>
-              {post.date} - カテゴリ: {post.category || 'GENERAL'}
+              {post.date}
             </div>
 
             <div>{post.content}</div>
