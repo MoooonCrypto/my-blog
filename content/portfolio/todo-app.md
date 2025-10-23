@@ -3,7 +3,6 @@ title: "Todo管理アプリ"
 url: "https://todo-app-demo.vercel.app"
 thumbnail: "/images/portfolio/todo-app.png"
 date: "2024-01-10"
-description: "チーム向けのタスク管理アプリケーション"
 ---
 
 # Todo管理アプリ

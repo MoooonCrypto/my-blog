@@ -3,7 +3,6 @@ title: "CSSだけでグリッチエフェクト"
 url: "https://codepen.io/yourname/pen/glitch-effect"
 thumbnail: "/images/sandbox/css-glitch.png"
 date: "2024-01-20"
-description: "JSなしでレトロなグリッチエフェクトを実装"
 ---
 
 # CSSだけでグリッチエフェクト

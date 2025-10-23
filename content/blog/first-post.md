@@ -2,9 +2,6 @@
 ---
 title: "ブログサイトを立ち上げました"
 date: "2024-01-15"
-category: "tech"
-tags: ["React", "Next.js", "TypeScript"]
-description: "Next.js + MDXで個人ブログサイトを構築した話"
 ---
 
 # ブログサイトを立ち上げました

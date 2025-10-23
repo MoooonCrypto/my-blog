@@ -3,7 +3,6 @@ title: "Todo Manager Pro"
 url: "https://todo-app-demo.vercel.app"
 thumbnail: "/images/portfolio/todo-manager.png"
 date: "2024-01-10"
-description: "チーム向けタスク管理システム"
 ---
 
 # Todo Manager Pro

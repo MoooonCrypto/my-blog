@@ -31,7 +31,6 @@ export default function SandboxPage() {
                     <div style={{ padding: '16px' }}>
                       <h3 className="post-title">► {item.title || 'Untitled'}</h3>
                       <p className="post-meta" style={{ marginBottom: '8px' }}>{item.date}</p>
-                      <p className="post-description">{item.description || ''}</p>
 
                       {/* リンク */}
                       <div style={{ marginTop: '16px', display: 'flex', gap: '8px' }}>

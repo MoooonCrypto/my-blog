@@ -2,9 +2,6 @@
 export interface PostMetadata {
   title: string;
   date: string;
-  description?: string;
-  tags?: string[];
-  category?: string;
   slug: string;
 }
 
@@ -13,7 +10,6 @@ export interface PortfolioMetadata {
   url: string;                    // デモURL or GitHubリポジトリURL
   thumbnail: string;              // サムネイル画像パス
   date: string;
-  description: string;            // 最大100文字
   slug: string;
 }
 
@@ -22,7 +18,6 @@ export interface SandboxMetadata {
   url: string;                    // デモURL
   thumbnail: string;              // サムネイル画像パス
   date: string;
-  description: string;            // 最大100文字
   slug: string;
 }
 
