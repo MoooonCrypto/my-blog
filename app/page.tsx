@@ -13,8 +13,8 @@ export default function Home() {
         <div className="window-title">DEVELOPER.EXE - Personal Blog System v1.0</div>
         <div className="window-content">
           <div style={{ textAlign: 'center', marginBottom: '20px' }}>
-            <div className="logo">◊ RETRO DEVELOPER ◊</div>
-            <div className="tagline">個人開発エンジニアのデジタル記録庫</div>
+            <div className="logo">◊ MOKOSAU ◊</div>
+            <div className="tagline">個人開発日記とプロダクト保管庫</div>
           </div>
 
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', justifyContent: 'center', marginBottom: '20px' }}>
